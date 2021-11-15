@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_ok_image"
+        android:title="@string/image_scan_options_ok"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_load_image"
+        android:title="@string/image_scan_options_image"
+        app:showAsAction="ifRoom" />
+
+</menu>

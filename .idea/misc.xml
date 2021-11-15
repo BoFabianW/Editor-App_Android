@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/drawable/button.xml" value="0.3828125" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/dialog_file_delete.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/dialog_neu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/dialog_save_file.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/dialog_statistik.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/dialog_suchen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/image_scan.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/layout/text_scan.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/menu/cam_options.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/menu/image_scan_options.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Documents/Entwicklung/Android Studio/Fertige Apps/easy Text Editor Pro/app/src/main/res/menu/options.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Downloads/easyTextEditor-App_Android-master/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Fabian/Downloads/easyTextEditor-App_Android-master/app/src/main/res/layout/dialog_suchen.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Fabian/Downloads/easyTextEditor-App_Android-master/app/src/main/res/layout/settings.xml" value="0.20520833333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

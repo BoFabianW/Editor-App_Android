@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    Reihenfolge beim Erstellen beachten!   -->
+
+    <item android:id="@+id/item8" android:icon="@drawable/ic_speak" android:title="rec" app:showAsAction="ifRoom"></item>
+    <item android:id="@+id/item7" android:icon="@drawable/ic_speech" android:title="play" app:showAsAction="ifRoom"></item>
+
+    <item android:title="main" android:icon="@drawable/ic_main" app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/item0"
+                android:icon="@drawable/ic_scanner"
+                android:title="@string/options_text_scannen"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item00"
+                android:icon="@drawable/ic_scanner"
+                android:title="@string/options_image_scan"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item1"
+                android:icon="@drawable/ic_search"
+                android:title="@string/options_search"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item2"
+                android:icon="@drawable/ic_statistik"
+                android:title="@string/options_statistics"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item4"
+                android:icon="@drawable/ic_zoomin"
+                android:title="@string/options_zoomin"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item5"
+                android:icon="@drawable/ic_zoomout"
+                android:title="@string/options_zoomout"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item3"
+                android:icon="@drawable/ic_all"
+                android:title="@string/options_select_all"
+                app:showAsAction="never"></item>
+            <item
+                android:id="@+id/item6"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/options_settings"
+                app:showAsAction="never"></item>
+        </menu>
+    </item>
+</menu>
