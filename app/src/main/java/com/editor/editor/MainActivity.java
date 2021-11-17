@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
     MainActivityListener mainActivityListener;
 
     @SuppressLint("StaticFieldLeak")
-    public static TextView      txtAktuelleDatei, txtAnzahlWort, txtAnzahlZeichen, txtChange;
-    public EditText             editTextEingabe, editTextSuchen, editTextErsetzen;
-    public Button               btnNeu, btnSpeichern, btnOeffnen, btnJa, btnNein, btnSuchen,
-                                btnErsetzen, btnSuchenSchliessen, btnSchliessen, btnZurueck,
-                                btnVor, btnClose, btnSaveFile, btnNoSaveFile, btnDelete,
-                                btnDeleteJa, btnDeleteNein;
+    public static TextView txtAktuelleDatei, txtAnzahlWort, txtAnzahlZeichen, txtChange;
+    public EditText editTextEingabe, editTextSuchen, editTextErsetzen;
+    public Button btnNeu, btnSpeichern, btnOeffnen, btnJa, btnNein, btnSuchen,
+            btnErsetzen, btnSuchenSchliessen, btnSchliessen, btnZurueck,
+            btnVor, btnClose, btnSaveFile, btnNoSaveFile, btnDelete,
+            btnDeleteJa, btnDeleteNein;
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     public Switch switchCase;
@@ -66,16 +66,11 @@ public class MainActivity extends AppCompatActivity {
     public String sprache;
     public String neuScanText = "";
     public float textSize = 18;
-
     public int indexShow;
     public String aktuellGesuchtesWort;
     public ArrayList<Integer> indexWort = new ArrayList<>();
     public ArrayList<String> result = new ArrayList<>();
-
     public DocumentFile documentFile;
-    public OutputStream fos;
-    public InputStream fis;
-
     public AlertDialog go;
     public TextToSpeech tts;
 
@@ -89,17 +84,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextEingabe     = findViewById(R.id.editTextEingabe);
-        txtAktuelleDatei    = findViewById(R.id.txtAktuelleDatei);
-        txtChange           = findViewById(R.id.txtChange);
+        editTextEingabe = findViewById(R.id.editTextEingabe);
+        txtAktuelleDatei = findViewById(R.id.txtAktuelleDatei);
+        txtChange = findViewById(R.id.txtChange);
 
-        btnNeu              = findViewById(R.id.btnNeu);
-        btnSpeichern        = findViewById(R.id.btnSpeichern);
-        btnDelete           = findViewById(R.id.btnDelete);
-        btnOeffnen          = findViewById(R.id.btnOeffnen);
-        btnZurueck          = findViewById(R.id.btnZurueck);
-        btnVor              = findViewById(R.id.btnVor);
-        btnClose            = findViewById(R.id.btnClose);
+        btnNeu = findViewById(R.id.btnNeu);
+        btnSpeichern = findViewById(R.id.btnSpeichern);
+        btnDelete = findViewById(R.id.btnDelete);
+        btnOeffnen = findViewById(R.id.btnOeffnen);
+        btnZurueck = findViewById(R.id.btnZurueck);
+        btnVor = findViewById(R.id.btnVor);
+        btnClose = findViewById(R.id.btnClose);
 
         mainActivityListener = new MainActivityListener(this);
 
@@ -115,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
         // Listener für EditText zuweisen.
         editTextEingabe.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @SuppressLint("SetTextI18n")
             @Override
@@ -124,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         // Laden der SharedPreferences für Sprache
@@ -132,28 +129,25 @@ public class MainActivity extends AppCompatActivity {
         sprache = prefSprache.getString("Sprache", "deutsch");
 
         // Neues TextToSpeech-Objekt erstellen.
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
+        tts = new TextToSpeech(this, status -> {
 
-                if (status == TextToSpeech.SUCCESS) {
+            if (status == TextToSpeech.SUCCESS) {
 
-                    // Prüfen welche Sprache eingestellt ist.
-                    switch (sprache) {
-                        case "deutsch":
-                            tts.setLanguage(Locale.GERMAN);
-                            break;
+                // Prüfen welche Sprache eingestellt ist.
+                switch (sprache) {
+                    case "deutsch":
+                        tts.setLanguage(Locale.GERMAN);
+                        break;
 
-                        case "englisch":
-                            tts.setLanguage(Locale.ENGLISH);
-                            break;
+                    case "englisch":
+                        tts.setLanguage(Locale.ENGLISH);
+                        break;
 
-                        case "französisch":
-                            tts.setLanguage(Locale.FRENCH);
-                            break;
-                    }
-                    tts.setSpeechRate(0.8f);
+                    case "französisch":
+                        tts.setLanguage(Locale.FRENCH);
+                        break;
                 }
+                tts.setSpeechRate(0.8f);
             }
         });
 
@@ -268,70 +262,75 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        try {
-            result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        } catch (Exception ignored) {}
+        if (data != null) {
 
-        try {
-            saveFile = data.getData();
+            try {
+                result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            } catch (Exception ignored) {}
 
-            /*
-             * Übergibt dem DocumentFile-Object die Uri aus 'saveFile' und wandelt die Uri in einen Klartext-String.
-             * Dateiname wird nun sichtbar. (Im Uri-Format werden Dateinamen durch eine Zahl angezeigt!)
-             */
-            documentFile = DocumentFile.fromSingleUri(this, saveFile);
+            try {
+                saveFile = data.getData();
 
-            int lastIndex;
+                /*
+                 * Übergibt dem DocumentFile-Object die Uri aus 'saveFile' und wandelt die Uri in einen Klartext-String.
+                 * Dateiname wird nun sichtbar. (Im Uri-Format werden Dateinamen durch eine Zahl angezeigt!)
+                 */
+                documentFile = DocumentFile.fromSingleUri(this, saveFile);
 
-            // Der int-Variable wird der Index des letzten Vorkommen des Zeichens '/' übergeben.
-            lastIndex = documentFile.getUri().toString().lastIndexOf("/");
+                int lastIndex;
 
-            showFile = documentFile.getUri().toString().substring(0, lastIndex + 1) + documentFile.getName();
+                // Der int-Variable wird der Index des letzten Vorkommen des Zeichens '/' übergeben.
+                lastIndex = documentFile.getUri().toString().lastIndexOf("/");
 
-            // Ersetzt den 'slash' durch den 'backslash' in dem String 'showFile'.
-            showFile = showFile.replace("/", "\\");
+                showFile = documentFile.getUri().toString().substring(0, lastIndex + 1) + documentFile.getName();
 
-        } catch (Exception ignored) {}
+                // Ersetzt den 'slash' durch den 'backslash' in dem String 'showFile'.
+                showFile = showFile.replace("/", "\\");
 
-        switch (requestCode) {
+            } catch (Exception ignored) {}
 
-            case KEY_SAVE:
-                try {
-                    if (resultCode == RESULT_OK) {
+            switch (requestCode) {
 
-                        speichern();
-                        break;
+                case KEY_SAVE:
+                    try {
+                        if (resultCode == RESULT_OK) {
+
+                            speichern();
+                            break;
+                        }
+                    } catch (Exception ignored) {
                     }
-                } catch (Exception ignored) {}
 
-            case KEY_OPEN:
-                try {
-                    if (resultCode == RESULT_OK) {
+                case KEY_OPEN:
+                    try {
+                        if (resultCode == RESULT_OK) {
 
-                        oeffnen();
-                        break;
+                            oeffnen();
+                            break;
+                        }
+                    } catch (Exception ignored) {
                     }
-                } catch (Exception ignored) {}
 
-            case KEY_SPEAK:
-                try {
-                    if (resultCode == RESULT_OK) {
+                case KEY_SPEAK:
+                    try {
+                        if (resultCode == RESULT_OK) {
 
-                        StringBuilder textBestand = new StringBuilder();
-                        textBestand.append(editTextEingabe.getText().toString());
-                        textBestand.append(result.get(0));
-                        textBestand.append(" ");
-                        editTextEingabe.setText(textBestand);
-                        break;
+                            StringBuilder textBestand = new StringBuilder();
+                            textBestand.append(editTextEingabe.getText().toString());
+                            textBestand.append(result.get(0));
+                            textBestand.append(" ");
+                            editTextEingabe.setText(textBestand);
+                            break;
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-                }
+            }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -349,6 +348,9 @@ public class MainActivity extends AppCompatActivity {
     public void speichern() {
 
         try {
+
+            OutputStream fos;
+
             fos = getContentResolver().openOutputStream(saveFile);
             fos.write(editTextEingabe.getText().toString().getBytes());
             fos.flush();
@@ -358,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
             txtChange.setText("");
 
             btnDelete.setEnabled(true);
-            btnDelete.setTextColor(Color.rgb(46,131,184));
+            btnDelete.setTextColor(Color.rgb(46, 131, 184));
 
             Toast.makeText(this, R.string.dialog_save_file + showFile + R.string.dialog_save_info, Toast.LENGTH_LONG).show();
 
@@ -383,6 +385,9 @@ public class MainActivity extends AppCompatActivity {
     public void oeffnen() {
 
         try {
+
+            InputStream fis;
+
             fis = getContentResolver().openInputStream(saveFile);
 
             // Schreibt den Inhalt aus 'InputStraemReader' in einen Puffer (BufferedReader)
@@ -390,7 +395,6 @@ public class MainActivity extends AppCompatActivity {
 
             String zeile;
             StringBuilder sb = new StringBuilder();
-
 
             /* Durchläuft die Schleife solange noch eine neue Zeile vohanden ist.
              * Ist keine Zeile mehr vohanden wird der Wert 'null' zurückgegeben und die Schleife wird beendet.
@@ -688,14 +692,14 @@ public class MainActivity extends AppCompatActivity {
 
         int position = 0;
 
-        for (int i = 0 ; i < text.length ; i++) {
+        for (char c : text) {
 
             // Zeilenumbrüche werden als Zeichen gelesen. Aus diesem Grund wird bei jedem Zeilenumbruch im Text ein Zeichen für die Länge abgezogen.
-            if (text[i] == '\n') anzahlZeichen = anzahlZeichen -1;
+            if (c == '\n') anzahlZeichen = anzahlZeichen - 1;
             txtAnzahlZeichen.setText(String.valueOf(anzahlZeichen));
 
             // Enthält ein Char eines dieser Zeichen, wird die int-Variable 'position' um 1 erhöht und die String-Variable zurück gesetzt.
-            if (text[i] == ' ' || text[i] == '.' || text[i] == ',' || text[i] == ':' || text[i] == ';' || text[i] == '(' || text[i] == ')' || text[i] == '"' || text[i] == '!' || text[i] == '?' || text[i] == '=' || text[i] == '[' || text[i] == ']' || text[i] == '\n'){
+            if (c == ' ' || c == '.' || c == ',' || c == ':' || c == ';' || c == '(' || c == ')' || c == '"' || c == '!' || c == '?' || c == '=' || c == '[' || c == ']' || c == '\n') {
 
                 if (stringChar.length() > 0) {
                     position++;
@@ -703,7 +707,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             } else {
-                stringChar.append(text[i]);
+                stringChar.append(c);
             }
         }
 
@@ -792,8 +796,6 @@ public class MainActivity extends AppCompatActivity {
             textDurchsuchen = textDurchsuchen.toLowerCase();
             gesuchterText = gesuchterText.toLowerCase();
         }
-
-        Log.d("Test : ", textDurchsuchen + " " + gesuchterText);
 
         int index = 0;
 

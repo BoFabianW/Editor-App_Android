@@ -3,15 +3,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.editor.editor"
         minSdkVersion 18
-        targetSdkVersion 31
-        versionCode 48
-        versionName "48"
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 28
+        versionCode 50
+        versionName "50"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
