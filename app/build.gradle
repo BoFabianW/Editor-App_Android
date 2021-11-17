@@ -9,8 +9,8 @@ android {
     defaultConfig {
         applicationId "com.editor.editor"
         minSdkVersion 18
-        //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 28
+        //noinspection OldTargetApi
+        targetSdkVersion 30
         versionCode 50
         versionName "50"
 
